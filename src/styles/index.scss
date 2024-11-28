@@ -1,0 +1,14 @@
+/*
+* Global styles
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+
+// Colors
+:root {
+	--color-white: #F5F3F5;
+	--color-grey: #7B7A7A;
+	--color-black: #000000;
+}
+
+@import './mixins.scss';

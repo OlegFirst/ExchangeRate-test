@@ -1,0 +1,10 @@
+.Header {
+	color: var(--color-white);
+	background-color: var(--color-grey);
+	padding: 20px 10px;
+	
+	&__Items {
+		list-style-type: none;
+		padding-left: 0;
+	}
+}
