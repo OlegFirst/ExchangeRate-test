@@ -54,17 +54,6 @@ const Selector = (props: any) => {
 					</option>
 				))}
 			</select>
-			
-			<label className='Selector__Radio-Wrapper'>
-				<b>Buy</b>
-				
-				<input
-					className='Selector__Radio'
-					type='radio'
-					name='buy'					
-					onChange={() => props.onBuyChange(exchangeRateItemId)}
-				/>
-			</label>
     </div>
   );
 }

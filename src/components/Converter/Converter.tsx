@@ -9,42 +9,42 @@ import './Converter.scss';
 const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ exchangeRateItems }) => {
   const [data, setData] = useState<IConverterData[]>(dataInitialState);
 		
-	const onChange = (selectorData: ConverterData) => {		
-		setData(prevState => (
-			prevState.map((item) => (
-				item.selectorId === selectorData.selectorId
-					? {
-						...item,
-						...selectorData
-					}
-					: item
-			)
-		)));
-	};
+	// const onChange = (selectorData: ConverterData) => {		
+		// setData(prevState => (
+			// prevState.map((item) => (
+				// item.selectorId === selectorData.selectorId
+					// ? {
+						// ...item,
+						// ...selectorData
+					// }
+					// : item
+			// )
+		// )));
+	// };
 	
-	const onBuyChange = (id: number) => {
-		setSelectorForBuy(id);
-	};
+	// const onBuyChange = (id: number) => {
+		// setSelectorForBuy(id);
+	// };
 	
-	useEffect(() => {
-		calculate({ data, selectorIdForBuy, exchangeRateItems });
-	}, [data, selectorIdForBuy]);
+	// useEffect(() => {
+		// calculate({ data, selectorIdForBuy, exchangeRateItems });
+	// }, [data, selectorIdForBuy]);
 	
 	return (
     <main className='Converter'>
-			{data?.map((item: IConverterData, index: number) => {
-				const disabledId: number = item.selectorId === 1 ? data[1].exchangeRateItemId : data[0].exchangeRateItemId
-				const isBuy = item.selectorId === selectorIdForBuy;
+			{data.map((item: IConverterData, index: number) => {
+				// const disabledId: number = item.selectorId === 1 ? data[1].exchangeRateItemId : data[0].exchangeRateItemId
+				// const isBuy = item.selectorId === selectorIdForBuy;
 				
 				return (
 					<Selector
-						key={item.selectorId}
+						key={index}
 						data={item}
-						isBuy={isBuy}
+						isBuy={true}
 						exchangeRateItems={exchangeRateItems}
-						disabledExchangeRateItemId={disabledId}
-						onChange={onChange}
-						onBuyChange={onBuyChange} 
+						disabledExchangeRateItemId={false}
+						// onChange={onChange}
+						// onBuyChange={onBuyChange} 
 					/>
 				)
 			})}

@@ -4,8 +4,8 @@ const selectorComponentsCount: number = 2;
 
 const ids: number[] = Array(selectorComponentsCount).fill(0).map((_, index) => index + 1);
 
-export const dataInitialState: IConverterData[] = ids.map((id: number) => ({
+export const dataInitialState: IConverterData[] = ids.map((id: number): any => ({
 	selectorComponentId: id,
 	value: 0,
 	exchangeRateItemId: id
-}): IConverterData);
+}));
