@@ -40,6 +40,8 @@ const Header: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ exc
 							</tr>
 						)
 					}
+          
+          return null;
 				})}
 			</tbody>
 		</table>

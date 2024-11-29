@@ -1,16 +1,11 @@
-import { FunctionComponent } from 'react';
-
-import { IConverterData, IExchangeRate } from '../../../common/interfaces';
+import { IExchangeRate } from '../../../common/interfaces';
 import './Selector.scss';
 
 const Selector = (props: any) => {
 	const {		
 		data: {
-			selectorId,
-			exchangeRateItemId,
 			value
 		},
-		isBuy,
 		exchangeRateItems,
 		disabledExchangeRateItemId
 	} = props;

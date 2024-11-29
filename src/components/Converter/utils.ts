@@ -1,4 +1,4 @@
-import { IConverterData, IExchangeRate } from '../../common/interfaces';
+import { IExchangeRate, IConverterData } from '../../common/interfaces';
 
 const selectorComponentsCount: number = 2;
 
@@ -9,3 +9,7 @@ export const dataInitialState: IConverterData[] = ids.map((id: number): any => (
 	value: 0,
 	exchangeRateItemId: id
 }));
+
+export const calculate = (data: IConverterData[], exchangeRateItems: IExchangeRate[]) => {
+  console.log(data)
+};

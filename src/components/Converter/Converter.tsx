@@ -3,48 +3,41 @@ import { useEffect, useState, FunctionComponent } from 'react';
 import Selector from './Selector/Selector';
 
 import { IExchangeRate, IConverterData } from '../../common/interfaces';
-import { dataInitialState } from './utils';
+import { dataInitialState, calculate } from './utils';
 import './Converter.scss';
 
 const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ exchangeRateItems }) => {
   const [data, setData] = useState<IConverterData[]>(dataInitialState);
-		
-	// const onChange = (selectorData: ConverterData) => {		
-		// setData(prevState => (
-			// prevState.map((item) => (
-				// item.selectorId === selectorData.selectorId
-					// ? {
-						// ...item,
-						// ...selectorData
-					// }
-					// : item
-			// )
-		// )));
-	// };
 	
-	// const onBuyChange = (id: number) => {
-		// setSelectorForBuy(id);
-	// };
+  const onChange = (selectorData: IConverterData) => {		
+		setData(prevState => (
+			prevState.map((item: IConverterData) => (
+				item.selectorComponentId === selectorData.selectorComponentId
+					? {
+						...item,
+						...selectorData
+					}
+					: item
+			)
+		)));
+	};
 	
-	// useEffect(() => {
-		// calculate({ data, selectorIdForBuy, exchangeRateItems });
-	// }, [data, selectorIdForBuy]);
+	useEffect(() => {
+		calculate(data, exchangeRateItems);
+	}, [data, exchangeRateItems]);
 	
 	return (
     <main className='Converter'>
 			{data.map((item: IConverterData, index: number) => {
-				// const disabledId: number = item.selectorId === 1 ? data[1].exchangeRateItemId : data[0].exchangeRateItemId
-				// const isBuy = item.selectorId === selectorIdForBuy;
-				
+				const disabledId: number = item.selectorComponentId === 1 ? data[1].exchangeRateItemId : data[0].exchangeRateItemId
+								
 				return (
 					<Selector
 						key={index}
 						data={item}
-						isBuy={true}
 						exchangeRateItems={exchangeRateItems}
-						disabledExchangeRateItemId={false}
-						// onChange={onChange}
-						// onBuyChange={onBuyChange} 
+						disabledExchangeRateItemId={disabledId}
+						onChange={onChange}
 					/>
 				)
 			})}
