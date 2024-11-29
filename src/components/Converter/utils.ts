@@ -1,11 +1,11 @@
-import { ConverterData } from '../../common/interfaces';
+import { IConverterData, IExchangeRate } from '../../common/interfaces';
 
-const selectorsCount: number = 2;
+const selectorComponentsCount: number = 2;
 
-const ids: any[] = Array(selectorsCount).fill(0).map((_, index) => index + 1);
+const ids: number[] = Array(selectorComponentsCount).fill(0).map((_, index) => index + 1);
 
-export const dataInitialState: ConverterData[] = ids.map((id) => ({
-	selectorId: id,
-	exchangeRateId: null,
-	value: 0
-}));
+export const dataInitialState: IConverterData[] = ids.map((id: number) => ({
+	selectorComponentId: id,
+	value: 0,
+	exchangeRateItemId: id
+}): IConverterData);

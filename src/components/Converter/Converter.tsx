@@ -1,16 +1,15 @@
-import { useState, FunctionComponent } from 'react';
+import { useEffect, useState, FunctionComponent } from 'react';
 
 import Selector from './Selector/Selector';
 
-import { ExchangeRate, ConverterData } from '../../common/interfaces';
+import { IExchangeRate, IConverterData } from '../../common/interfaces';
 import { dataInitialState } from './utils';
+import './Converter.scss';
 
-const Converter: FunctionComponent<{ exchangeRateItems: ExchangeRate[] }> = ({ exchangeRateItems }) => {
-  const [data, setData] = useState<ConverterData[]>(dataInitialState);
-	
-	console.log(data)
-	
-	const onChange = (selectorData: any) => {		
+const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ exchangeRateItems }) => {
+  const [data, setData] = useState<IConverterData[]>(dataInitialState);
+		
+	const onChange = (selectorData: ConverterData) => {		
 		setData(prevState => (
 			prevState.map((item) => (
 				item.selectorId === selectorData.selectorId
@@ -23,16 +22,32 @@ const Converter: FunctionComponent<{ exchangeRateItems: ExchangeRate[] }> = ({ e
 		)));
 	};
 	
+	const onBuyChange = (id: number) => {
+		setSelectorForBuy(id);
+	};
+	
+	useEffect(() => {
+		calculate({ data, selectorIdForBuy, exchangeRateItems });
+	}, [data, selectorIdForBuy]);
+	
 	return (
     <main className='Converter'>
-			{data?.map((item: ConverterData, index: number) => (
-				<Selector
-					key={index}
-					{...item}
-					exchangeRateItems={exchangeRateItems}
-					onChange={onChange} 
-				/>
-			))}
+			{data?.map((item: IConverterData, index: number) => {
+				const disabledId: number = item.selectorId === 1 ? data[1].exchangeRateItemId : data[0].exchangeRateItemId
+				const isBuy = item.selectorId === selectorIdForBuy;
+				
+				return (
+					<Selector
+						key={item.selectorId}
+						data={item}
+						isBuy={isBuy}
+						exchangeRateItems={exchangeRateItems}
+						disabledExchangeRateItemId={disabledId}
+						onChange={onChange}
+						onBuyChange={onBuyChange} 
+					/>
+				)
+			})}
     </main>
   );
 }

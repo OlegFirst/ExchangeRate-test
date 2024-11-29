@@ -1,19 +1,48 @@
 import { FunctionComponent } from 'react';
+import moment from 'moment';
 
-import { ExchangeRate } from '../../common/interfaces';
+import { IExchangeRate } from '../../common/interfaces';
 import './Header.scss';
 
-const Header: FunctionComponent<{ exchangeRateItems: ExchangeRate[] }> = ({ exchangeRateItems }) => (
+const Header: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ exchangeRateItems }) => (
 	<header className='Header'>
-		1 UAH rate to:
+		<h1 className='Header__Title'>Privat Bank currency rates</h1>
 		
-		<ul className='Header__Items'>
-			{exchangeRateItems.map(({ currency, buy, sale }) => (
-				<li key={currency}>
-					{currency}. {buy}, {sale}
-				</li>
-			))}
-		</ul>
+		<h4 className='Header__Date'>Date: {moment().format('MM.DD.YYYY')}</h4>
+		
+		<img 
+			className='Header__Image'
+			src='images/exchange.jpg'
+			width='80'
+			height='80'
+			alt='bg' 
+		/>
+		
+		<table className='Header__Table'>
+			<thead>
+				<tr>
+					<th>Buy</th>
+					<th>Currency</th>
+					<th>Sale</th>
+				</tr>
+			</thead>
+			
+			<tbody>			
+				{exchangeRateItems.map((item: IExchangeRate) => {
+					const { id, currency, buy, sale } = item;
+					
+					if (id > 1) {
+						return (
+							<tr key={id}>
+								<td>{buy}</td>
+								<td>{currency}</td>
+								<td>{sale}</td>
+							</tr>
+						)
+					}
+				})}
+			</tbody>
+		</table>
 	</header>
 );
 

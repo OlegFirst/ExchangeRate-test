@@ -2,25 +2,34 @@ import { useEffect, useState } from 'react';
 
 import Header from './components/Header/Header';
 import Converter from './components/Converter/Converter';
+import Load from './components/Load/Load';
 
-import { ResponseData, ExchangeRate } from './common/interfaces';
+import { IResponseData, IExchangeRate } from './common/interfaces';
 import { getData } from './common/services';
 
 const App = () => {
-	const [exchangeRateItems, setExchangeRateItems] = useState<ExchangeRate[]>([]);
-	
-	console.log(exchangeRateItems);
+	const [exchangeRateItems, setExchangeRateItems] = useState<IExchangeRate[]>([]);
 	
 	useEffect(() => {
 		getData()
 			.then((response: any) => {				
-				response?.json().then((data: ResponseData[]) => {
+				response?.json().then((data: IResponseData[]) => {					
+					const fullData = [
+						{
+							ccy: 'UAH',
+							base_ccy: '',
+							buy: '0',
+							sale: '0'
+						},
+						...data
+					];					
+					
 					setExchangeRateItems(
-						data.map((item: ResponseData, index: number) => ({
+						fullData.map((item: IResponseData, index: number) => ({
 							id: index + 1,
 							currency: item.ccy,
-							buy: item.buy,
-							sale: item.sale
+							buy: Number(item.buy),
+							sale: Number(item.sale)
 						}))
 					);
 				});
@@ -30,11 +39,15 @@ const App = () => {
 			})
 	}, []);
 	
+	if (exchangeRateItems.length === 0) {
+		return (
+			<Load />
+		)
+	}
+	
   return (
     <section className='App'>
 			<Header exchangeRateItems={exchangeRateItems} />
-		
-			<h1>Privat Bank currency rates</h1>
 			
       <Converter exchangeRateItems={exchangeRateItems} />
     </section>

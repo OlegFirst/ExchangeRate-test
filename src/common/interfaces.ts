@@ -2,23 +2,23 @@
 * Interfaces
 */
 
-export interface ResponseData {
+export interface IResponseData {
 	base_ccy: string,
-	buy: string,
 	ccy: string,
+	buy: string,	
 	sale: string
 };
 
 // @vars: {buy} or {sell} the {currency} concerning to the UAH
-export interface ExchangeRate {
+export interface IExchangeRate {
 	id: number,
 	currency: string,
-	buy: string,
-	sale: string
+	buy: number
+	sale: number
 };
 
-export interface ConverterData {
-	selectorId: number,	
+export interface IConverterData {	
+	selectorComponentId: number,
 	value: number,
-	exchangeRateId: number | null
+	exchangeRateItemId: number	
 };

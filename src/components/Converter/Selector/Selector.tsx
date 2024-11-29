@@ -1,36 +1,38 @@
 import { FunctionComponent } from 'react';
 
-import { ConverterData, ExchangeRate } from '../../../common/interfaces';
+import { IConverterData, IExchangeRate } from '../../../common/interfaces';
+import './Selector.scss';
 
 const Selector = (props: any) => {
-	const {
-		selectorId,
-		exchangeRateId,
-		value,
-		exchangeRateItems
+	const {		
+		data: {
+			selectorId,
+			exchangeRateItemId,
+			value
+		},
+		isBuy,
+		exchangeRateItems,
+		disabledExchangeRateItemId
 	} = props;
 	
 	const onInputChange = (e: any) => {		
 		props.onChange({
-			selectorId,
-			value: e.target.value,
-			exchangeRateId
+			...props.data,
+			value: Number(e.target.value)
 		});
 	};
 	
 	const onSelectChange = (e: any) => {
 		props.onChange({
-			selectorId,
-			value,
-			exchangeRateId: Number(e.target.value)
+			...props.data,
+			exchangeRateItemId: Number(e.target.value)
 		});
-	}
+	};
 	
   return (
     <div className='Selector'>
 			<input 
 				className='Selector__Input'
-				name='amount'
 				type='number'
 				placeholder='Amount'
 				value={value}
@@ -38,16 +40,31 @@ const Selector = (props: any) => {
 				onFocus={(e) => e.target.select()}
 			/>
 			
-			<select onChange={onSelectChange}>
-				{exchangeRateItems.map((item: ExchangeRate, index: number) => (
+			<select 
+				className='Selector__Select'
+				onChange={onSelectChange}
+			>
+				{exchangeRateItems.map((item: IExchangeRate, index: number) => (
 					<option 
 						key={index}
 						value={item.id}
+						disabled={item.id === disabledExchangeRateItemId}
 					>
 						{item.currency}
 					</option>
 				))}
 			</select>
+			
+			<label className='Selector__Radio-Wrapper'>
+				<b>Buy</b>
+				
+				<input
+					className='Selector__Radio'
+					type='radio'
+					name='buy'					
+					onChange={() => props.onBuyChange(exchangeRateItemId)}
+				/>
+			</label>
     </div>
   );
 }
