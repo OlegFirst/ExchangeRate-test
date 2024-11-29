@@ -48,11 +48,11 @@ const App = () => {
 	}
 	
   return (
-    <section className='App'>
+  <section className='App'>
 			<Header exchangeRateItems={exchangeRateItems} />
 			
-      <Converter exchangeRateItems={exchangeRateItems} />
-    </section>
+  <Converter exchangeRateItems={exchangeRateItems} />
+  </section>
   );
 }
 
