@@ -7,7 +7,7 @@ const Selector = (props: any) => {
 			value
 		},
 		exchangeRateItems,
-		disabledExchangeRateItemId
+		selectedCurrencyIds
 	} = props;
 	
 	const onInputChange = (e: any) => {		
@@ -43,7 +43,7 @@ const Selector = (props: any) => {
 					<option 
 						key={index}
 						value={item.id}
-						disabled={item.id === disabledExchangeRateItemId}
+						disabled={selectedCurrencyIds.some((selectedId: number) => selectedId === item.id)}
 					>
 						{item.currency}
 					</option>

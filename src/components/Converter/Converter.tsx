@@ -1,16 +1,26 @@
-import { useEffect, useState, FunctionComponent } from 'react';
+import { useEffect, useState, useRef, FunctionComponent } from 'react';
 
 import Selector from './Selector/Selector';
 
-import { IExchangeRate, IConverterData } from '../../common/interfaces';
+import { 
+  IExchangeRate,
+  IConverterData, 
+  selectorComponentIdValues
+} from '../../common/interfaces';
 import { dataInitialState, calculate } from './utils';
 import './Converter.scss';
 
 const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ exchangeRateItems }) => {
   const [data, setData] = useState<IConverterData[]>(dataInitialState);
-	
-  const onChange = (selectorData: IConverterData) => {		
-		setData(prevState => (
+	const [selectedCurrencyIds, setSelectedCurrencyIds] = useState<number[]>([]);
+  
+  const onChange = (selectorData: IConverterData) => {
+    // calculate(selectorData.selectorComponentId, data, exchangeRateItems);
+    
+    // return;
+    
+    // Update focused filed
+    setData(prevState => (
 			prevState.map((item: IConverterData) => (
 				item.selectorComponentId === selectorData.selectorComponentId
 					? {
@@ -20,23 +30,40 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
 					: item
 			)
 		)));
+    
+    // Update blured filed
+    // const focusedId = selectorData.selectorComponentId;
+    // calculate(focusedId, data, exchangeRateItems);
 	};
 	
-	useEffect(() => {
-		calculate(data, exchangeRateItems);
-	}, [data, exchangeRateItems]);
+  useEffect(() => {
+		const currentSelectedCurrencyIds = data.reduce((acc, item) => (
+      acc.concat(item.exchangeRateItemId)
+    ), [] as number[]);
+    
+    setSelectedCurrencyIds(currentSelectedCurrencyIds);
+	}, [data]);
+  
+  useEffect(() => {
+    console.log('_', selectedCurrencyIds)
+  }, [selectedCurrencyIds]);
 	
 	return (
     <main className='Converter'>
 			{data.map((item: IConverterData, index: number) => {
-				const disabledId: number = item.selectorComponentId === 1 ? data[1].exchangeRateItemId : data[0].exchangeRateItemId
+        
+        
+        
+        // const disabledId: number = item.selectorComponentId === 1 
+          // ? data[1].exchangeRateItemId 
+          // : data[0].exchangeRateItemId
 								
 				return (
 					<Selector
 						key={index}
 						data={item}
 						exchangeRateItems={exchangeRateItems}
-						disabledExchangeRateItemId={disabledId}
+						selectedCurrencyIds={selectedCurrencyIds}
 						onChange={onChange}
 					/>
 				)

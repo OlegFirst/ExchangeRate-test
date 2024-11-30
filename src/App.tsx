@@ -8,7 +8,6 @@ import { IResponseData, IExchangeRate } from './common/interfaces';
 import { getData } from './common/services';
 
 const App = () => {
-  console.log();
   const [exchangeRateItems, setExchangeRateItems] = useState<IExchangeRate[]>([]);
 
   useEffect(() => {
