@@ -48,7 +48,7 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
     console.log('_', selectedCurrencyIds)
   }, [selectedCurrencyIds]);
 	
-	return (
+  return (
     <main className='Converter'>
       {data.map((item: IConverterData, index: number) => {
         
