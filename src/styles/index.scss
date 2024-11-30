@@ -7,12 +7,12 @@
 
 // Colors
 :root {
-	--color-white: #F5F3F5;
-	--color-grey: #7B7A7A;
-	--color-grey-hover: #C0C0C0;
-	--color-black: #000000;
-	--color-blue: #0033CC;
-	--color-blue-hover: #0040FF;
+  --color-white: #F5F3F5;
+  --color-grey: #7B7A7A;
+  --color-grey-hover: #C0C0C0;
+  --color-black: #000000;
+  --color-blue: #0033CC;
+  --color-blue-hover: #0040FF;
 }
 
 p,
@@ -25,15 +25,15 @@ textarea,
 select,
 table,
 button {
-	@include font(1rem, 300, 33px);
+  @include font(1rem, 300, 33px);
 }
 
 input {
-	padding: 0 10px;
-	
-	&:hover {
-		color: var(--color-grey);
-	}
+  padding: 0 10px;
+
+  &:hover {
+    color: var(--color-grey);
+  }
 }
 
 input, textarea {
@@ -41,25 +41,25 @@ input, textarea {
 }
 
 h1 {
-	@include font(2.5rem, 500, 28px);
-	
-	@include responsive(xs) {
-		font-size: 2.2rem;
-	}
+  @include font(2.5rem, 500, 28px);
+
+  @include responsive(xs) {
+    font-size: 2.2rem;
+  }
 }
 
 h2 {
-	@include font(2rem, 500, 34px);
-	
-	@include responsive(xs) {
-		font-size: 1.9rem;
-	}
+  @include font(2rem, 500, 34px);
+
+  @include responsive(xs) {
+    font-size: 1.9rem;
+  }
 }
 
 h3 {
-	@include font(1.5rem, 500, 34px);
+  @include font(1.5rem, 500, 34px);
 }
 
 h4 {
-	@include font(1.2rem, 500, 34px);
+  @include font(1.2rem, 500, 34px);
 }

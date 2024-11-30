@@ -11,21 +11,21 @@ const App = () => {
   const [exchangeRateItems, setExchangeRateItems] = useState<IExchangeRate[]>([]);
 
   useEffect(() => {
-    getData()
-      .then((response: any) => {
-        response?.json().then((data: IResponseData[]) => {					
-          const fullData = [
-            {
-              ccy: 'UAH',
-              base_ccy: '',
-              buy: '0',
-              sale: '0'
-            },
-            ...data
-         ];	
+  getData()
+    .then((response: any) => {
+      response?.json().then((data: IResponseData[]) => {			
+        const fullData = [
+          {
+            ccy: 'UAH',
+            base_ccy: '',
+            buy: '0',
+            sale: '0'
+          },
+          ...data
+        ];
 
         setExchangeRateItems(
-          fullData.map((item: IResponseData, index: number) => ({
+        fullData.map((item: IResponseData, index: number) => ({
           id: index + 1,
           currency: item.ccy,
           buy: Number(item.buy),
@@ -46,11 +46,11 @@ const App = () => {
   }
 
   return (
-    <section className='App'>
-      <Header exchangeRateItems={exchangeRateItems} />
+  <section className='App'>
+    <Header exchangeRateItems={exchangeRateItems} />
 
-      <Converter exchangeRateItems={exchangeRateItems} />
-    </section>
+    <Converter exchangeRateItems={exchangeRateItems} />
+  </section>
   );
 }
 
