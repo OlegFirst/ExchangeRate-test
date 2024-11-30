@@ -12,7 +12,7 @@ import './Converter.scss';
 
 const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ exchangeRateItems }) => {
   const [data, setData] = useState<IConverterData[]>(dataInitialState);
-	const [selectedCurrencyIds, setSelectedCurrencyIds] = useState<number[]>([]);
+  const [selectedCurrencyIds, setSelectedCurrencyIds] = useState<number[]>([]);
   
   const onChange = (selectorData: IConverterData) => {
     // calculate(selectorData.selectorComponentId, data, exchangeRateItems);
@@ -21,15 +21,15 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
     
     // Update focused filed
     setData(prevState => (
-			prevState.map((item: IConverterData) => (
-				item.selectorComponentId === selectorData.selectorComponentId
-					? {
-						...item,
-						...selectorData
-					}
-					: item
-			)
-		)));
+      prevState.map((item: IConverterData) => (
+        item.selectorComponentId === selectorData.selectorComponentId
+        ? {
+          ...item,
+          ...selectorData
+        }
+        : item
+      )
+    )));
     
     // Update blured filed
     // const focusedId = selectorData.selectorComponentId;
@@ -37,7 +37,7 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
 	};
 	
   useEffect(() => {
-		const currentSelectedCurrencyIds = data.reduce((acc, item) => (
+    const currentSelectedCurrencyIds = data.reduce((acc, item) => (
       acc.concat(item.exchangeRateItemId)
     ), [] as number[]);
     
@@ -50,7 +50,7 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
 	
 	return (
     <main className='Converter'>
-			{data.map((item: IConverterData, index: number) => {
+      {data.map((item: IConverterData, index: number) => {
         
         
         
@@ -58,16 +58,16 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
           // ? data[1].exchangeRateItemId 
           // : data[0].exchangeRateItemId
 								
-				return (
-					<Selector
-						key={index}
-						data={item}
-						exchangeRateItems={exchangeRateItems}
-						selectedCurrencyIds={selectedCurrencyIds}
-						onChange={onChange}
-					/>
-				)
-			})}
+        return (
+          <Selector
+            key={index}
+            data={item}
+            exchangeRateItems={exchangeRateItems}
+            selectedCurrencyIds={selectedCurrencyIds}
+            onChange={onChange}
+          />
+        )
+      })}
     </main>
   );
 }
