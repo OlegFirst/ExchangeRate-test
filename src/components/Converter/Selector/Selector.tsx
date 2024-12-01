@@ -5,18 +5,18 @@ const Selector = (props: any) => {
   const {		
     data: {
       value,
-			exchangeRateItemId
+      exchangeRateItemId
     },
     exchangeRateItems,
     selectedCurrencyId
   } = props;
 	
   const onInputChange = (e: any) => {		
-		if (isNaN(Number(e.target.value)) || Number(e.target.value) < 0) {
-			return;
-		}
-		
-		props.onChange({
+    if (isNaN(Number(e.target.value)) || Number(e.target.value) < 0) {
+      return;
+    }
+
+    props.onChange({
       ...props.data,
       value: e.target.value
     });
@@ -34,7 +34,7 @@ const Selector = (props: any) => {
       <input 
         className='Selector__Input'
         placeholder='Amount'
-				type='text'
+        type='text'
         value={value}
         onChange={onInputChange}
         onFocus={(e) => e.target.select()}
@@ -42,14 +42,14 @@ const Selector = (props: any) => {
 			
       <select 
         className='Selector__Select'
-				defaultValue={exchangeRateItemId}
+        defaultValue={exchangeRateItemId}
         onChange={onSelectChange}
       >
         {exchangeRateItems.map((item: IExchangeRate, index: number) => (
           <option 
             key={index}
             value={item.id}
-						disabled={item.id === selectedCurrencyId}
+            disabled={item.id === selectedCurrencyId}
           >
             {item.currency}
           </option>

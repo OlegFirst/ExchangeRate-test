@@ -45,7 +45,7 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
     ), [] as ICurrentSelectedCurrencyId[]);
     
     setSelectedCurrencyIds(currentSelectedCurrencyIds);
-	}, [data]);
+  }, [data]);
 	
   return (
     <main className='Converter'>
