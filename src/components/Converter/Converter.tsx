@@ -1,11 +1,10 @@
-import { useEffect, useState, useRef, FunctionComponent } from 'react';
+import { useEffect, useState, FunctionComponent } from 'react';
 
 import Selector from './Selector/Selector';
 
 import { 
   IExchangeRate,
-  IConverterData, 
-  selectorComponentIdValues,
+  IConverterData,
 	ICurrentSelectedCurrencyId
 } from '../../common/interfaces';
 import { 

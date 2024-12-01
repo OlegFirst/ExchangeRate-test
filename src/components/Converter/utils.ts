@@ -5,7 +5,7 @@ import {
 	ICurrentSelectedCurrencyId
 } from '../../common/interfaces';
 
-import { selectorComponentsCount, ids } from './constants';
+import { ids } from './constants';
 
 const getConverterDataById = (id: selectorComponentIdValues, data: IConverterData[]): IConverterData => (
   data.find((item: IConverterData) => item.selectorComponentId === id) ?? {

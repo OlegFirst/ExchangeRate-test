@@ -11,19 +11,16 @@ const Selector = (props: any) => {
     selectedCurrencyId
   } = props;
 	
-  const onInputChange = (e: any) => {
+  const onInputChange = (e: any) => {		
+		if (isNaN(Number(e.target.value)) || Number(e.target.value) < 0) {
+			return;
+		}
+		
 		props.onChange({
       ...props.data,
       value: e.target.value
     });
   };
-	
-	// props.onChange({
-      // ...props.data,
-      // value: e.target.value.toString().startsWith('0') 
-				// ? Number(e.target.value.substr(1)) 
-				// : Number(e.target.value)
-    // });
 	
   const onSelectChange = (e: any) => {
     props.onChange({
