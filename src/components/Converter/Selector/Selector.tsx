@@ -14,9 +14,16 @@ const Selector = (props: any) => {
   const onInputChange = (e: any) => {
 		props.onChange({
       ...props.data,
-      value: Number(e.target.value)
+      value: e.target.value
     });
   };
+	
+	// props.onChange({
+      // ...props.data,
+      // value: e.target.value.toString().startsWith('0') 
+				// ? Number(e.target.value.substr(1)) 
+				// : Number(e.target.value)
+    // });
 	
   const onSelectChange = (e: any) => {
     props.onChange({
@@ -30,7 +37,7 @@ const Selector = (props: any) => {
       <input 
         className='Selector__Input'
         placeholder='Amount'
-				type='number'
+				type='text'
         value={value}
         onChange={onInputChange}
         onFocus={(e) => e.target.select()}

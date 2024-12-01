@@ -10,7 +10,7 @@ import { selectorComponentsCount, ids } from './constants';
 const getConverterDataById = (id: selectorComponentIdValues, data: IConverterData[]): IConverterData => (
   data.find((item: IConverterData) => item.selectorComponentId === id) ?? {
     selectorComponentId: null,
-    value: -1,
+    value: '-1',
     exchangeRateItemId: 0
   }
 )
@@ -26,7 +26,7 @@ const getExchangeRateById = (id: number, data: IExchangeRate[]): IExchangeRate =
 
 export const dataInitialState = ids.map((id: any): IConverterData => ({
   selectorComponentId: id,
-  value: 0,
+  value: '0',
   exchangeRateItemId: id
 }));
 
@@ -44,19 +44,19 @@ export const calculateBlurredData =
     focusedData: IConverterData,
     data: IConverterData[],    
     exchangeRateItems: IExchangeRate[]
-  ): number => {
+  ): string => {
   
 	const focusedId: selectorComponentIdValues = focusedData.selectorComponentId;
   const blurredId: selectorComponentIdValues = focusedId === 1 ? 2 : 1;
 	const blurredData: IConverterData = getConverterDataById(blurredId, data);
 
-	const value2: number = focusedData.value;   
+	const value2: number = parseFloat(focusedData.value);
   const { sale: sale2 } = getExchangeRateById(focusedData.exchangeRateItemId, exchangeRateItems);
   const { sale: sale1 } = getExchangeRateById(blurredData.exchangeRateItemId, exchangeRateItems);
      
   const value1 = value2 * sale2 / sale1;
 	
-	return value1;
+	return focusedData.value === '' ? '' : value1.toString();
 };
 
 export const getSelectedCurrencyId = (id: selectorComponentIdValues, data: ICurrentSelectedCurrencyId[]): number => {

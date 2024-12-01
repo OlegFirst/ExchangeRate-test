@@ -23,11 +23,11 @@ export interface IExchangeRate {
 
 export interface IConverterData {	
   selectorComponentId: selectorComponentIdValues,
-  value: number,
+  value: string,
   exchangeRateItemId: number
 };
 
 export interface ICurrentSelectedCurrencyId {
   selectorComponentId: selectorComponentIdValues,
   exchangeRateItemId: number
-}
+};

@@ -20,7 +20,7 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
   const [selectedCurrencyIds, setSelectedCurrencyIds] = useState<ICurrentSelectedCurrencyId[]>([]);
   
   const onChange = (focusedData: IConverterData) => {
-    const blurredValue: number = calculateBlurredData(focusedData, data, exchangeRateItems);
+    const blurredValue: string = calculateBlurredData(focusedData, data, exchangeRateItems);
 		
 		setData(prevState => (
       prevState.map((item: IConverterData) => (
