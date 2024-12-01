@@ -21,8 +21,8 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
   
   const onChange = (focusedData: IConverterData) => {
     const blurredValue: number = calculateBlurredData(focusedData, data, exchangeRateItems);
-       
-    setData(prevState => (
+		
+		setData(prevState => (
       prevState.map((item: IConverterData) => (
         item.selectorComponentId === focusedData.selectorComponentId
         ? {
@@ -37,10 +37,7 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
     )));
 	};
 	
-  useEffect(() => {
-		console.log('--------------------------------')
-		// console.log('data:', data)
-		
+  useEffect(() => {		
     const currentSelectedCurrencyIds = data.reduce((acc, item: IConverterData) => (
       acc.concat({
 				selectorComponentId: item.selectorComponentId,

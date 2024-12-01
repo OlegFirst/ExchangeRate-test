@@ -18,8 +18,8 @@ const App = () => {
           {
             ccy: 'UAH',
             base_ccy: '',
-            buy: '0',
-            sale: '0'
+            buy: '1',
+            sale: '1'
           },
           ...data
         ];

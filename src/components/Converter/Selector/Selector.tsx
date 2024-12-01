@@ -11,8 +11,8 @@ const Selector = (props: any) => {
     selectedCurrencyId
   } = props;
 	
-  const onInputChange = (e: any) => {		
-    props.onChange({
+  const onInputChange = (e: any) => {
+		props.onChange({
       ...props.data,
       value: Number(e.target.value)
     });
@@ -29,8 +29,8 @@ const Selector = (props: any) => {
     <div className='Selector'>
       <input 
         className='Selector__Input'
-        type='number'
         placeholder='Amount'
+				type='number'
         value={value}
         onChange={onInputChange}
         onFocus={(e) => e.target.select()}

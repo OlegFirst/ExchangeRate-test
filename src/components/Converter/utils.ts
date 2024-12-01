@@ -1,18 +1,16 @@
-import { 
+import {
+	selectorComponentIdValues,
   IExchangeRate,
   IConverterData,
-  selectorComponentIdValues,
 	ICurrentSelectedCurrencyId
 } from '../../common/interfaces';
 
-const selectorComponentsCount: selectorComponentIdValues = 2;
-
-const ids: any = Array(selectorComponentsCount).fill(0).map((_, index) => index + 1);
+import { selectorComponentsCount, ids } from './constants';
 
 const getConverterDataById = (id: selectorComponentIdValues, data: IConverterData[]): IConverterData => (
-  data.find((item: IConverterData) => item.exchangeRateItemId === id) ?? {
+  data.find((item: IConverterData) => item.selectorComponentId === id) ?? {
     selectorComponentId: null,
-    value: 0,
+    value: -1,
     exchangeRateItemId: 0
   }
 )
@@ -21,8 +19,8 @@ const getExchangeRateById = (id: number, data: IExchangeRate[]): IExchangeRate =
   data.find((item: IExchangeRate) => item.id === id) ?? {
     id: 0,
     currency: '',
-    buy: 0,
-    sale: 0
+    buy: -1,
+    sale: -1
   }
 );
 
@@ -47,8 +45,6 @@ export const calculateBlurredData =
     data: IConverterData[],    
     exchangeRateItems: IExchangeRate[]
   ): number => {
-    
-  // console.log(focusedData, data, exchangeRateItems)
   
 	const focusedId: selectorComponentIdValues = focusedData.selectorComponentId;
   const blurredId: selectorComponentIdValues = focusedId === 1 ? 2 : 1;
@@ -59,9 +55,6 @@ export const calculateBlurredData =
   const { sale: sale1 } = getExchangeRateById(blurredData.exchangeRateItemId, exchangeRateItems);
      
   const value1 = value2 * sale2 / sale1;
-	
-  console.log('/focused', {focusedId, value2, sale2});
-  console.log('/blurred', {blurredId, value1, sale1});
 	
 	return value1;
 };
