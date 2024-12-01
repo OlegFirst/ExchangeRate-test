@@ -11,32 +11,32 @@ const App = () => {
   const [exchangeRateItems, setExchangeRateItems] = useState<IExchangeRate[]>([]);
 
   useEffect(() => {
-  getData()
-  .then((response: any) => {
-  response?.json().then((data: IResponseData[]) => {			
-  const fullData = [
-  {
-  ccy: 'UAH',
-  base_ccy: '',
-  buy: '1',
-  sale: '1'
-  },
-  ...data
-  ];
+    getData()
+    .then((response: any) => {
+      response?.json().then((data: IResponseData[]) => {			
+        const fullData = [
+          {
+            ccy: 'UAH',
+            base_ccy: '',
+            buy: '1',
+            sale: '1'
+          },
+          ...data
+        ];
 
-  setExchangeRateItems(
-  fullData.map((item: IResponseData, index: number) => ({
-  id: index + 1,
-  currency: item.ccy,
-  buy: Number(item.buy),
-  sale: Number(item.sale)
-  }))
-  );
-  });
-  })
-  .catch((err: any) => {
-  console.log('Error ', err);				
-  })
+        setExchangeRateItems(
+          fullData.map((item: IResponseData, index: number) => ({
+            id: index + 1,
+            currency: item.ccy,
+            buy: Number(item.buy),
+            sale: Number(item.sale)
+          }))
+        );
+      });
+    })
+    .catch((err: any) => {
+      console.log('Error ', err);				
+    })
   }, []);
 
   if (exchangeRateItems.length === 0) {
