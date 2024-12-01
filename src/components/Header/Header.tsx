@@ -12,9 +12,9 @@ const Header: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ exc
 
     <h4 className='Header__Date'>Date: {moment().format('MM.DD.YYYY')}</h4>
 		
-		<div className='Header__ImageBlock'>
-			<ImageBlock />
-		</div>
+    <div className='Header__ImageBlock'>
+      <ImageBlock />
+    </div>
 
     <table className='Header__Table'>
       <thead>
