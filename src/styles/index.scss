@@ -11,8 +11,6 @@
   --color-grey: #7B7A7A;
   --color-grey-hover: #C0C0C0;
   --color-black: #000000;
-  --color-blue: #0033CC;
-  --color-blue-hover: #0040FF;
 }
 
 p,
@@ -41,7 +39,7 @@ input, textarea {
 }
 
 h1 {
-  @include font(2.5rem, 500, 28px);
+  @include font(2.5rem, 500, 34px);
 
   @include responsive(xs) {
     font-size: 2.2rem;

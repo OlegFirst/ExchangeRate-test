@@ -26,3 +26,8 @@ export interface IConverterData {
   value: number,
   exchangeRateItemId: number
 };
+
+export interface ICurrentSelectedCurrencyId {
+  selectorComponentId: selectorComponentIdValues,
+  exchangeRateItemId: number
+}

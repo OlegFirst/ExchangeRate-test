@@ -1,0 +1,18 @@
+.ImageBlock {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	
+	&__Circle {
+		background-color: var(--color-grey-hover);
+		border-radius: 50%;
+		width: 20px;
+		height: 20px;
+	}
+
+	&__Image {		
+		border-radius: 50%;
+		object-fit: cover;
+	}
+}

@@ -8,15 +8,14 @@
   background-color: var(--color-grey);
   padding: 20px 10px;
 
-  &__Image {		
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
   &__Title,
   &__Date {
     text-align: center;
   }
+	
+	&__Title {
+		text-transform: uppercase;
+	}
 
   &__Table {
     color: var(--color-grey);

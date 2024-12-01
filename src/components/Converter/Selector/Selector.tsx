@@ -4,10 +4,11 @@ import './Selector.scss';
 const Selector = (props: any) => {
   const {		
     data: {
-      value
+      value,
+			exchangeRateItemId
     },
     exchangeRateItems,
-    selectedCurrencyIds
+    selectedCurrencyId
   } = props;
 	
   const onInputChange = (e: any) => {		
@@ -37,13 +38,14 @@ const Selector = (props: any) => {
 			
       <select 
         className='Selector__Select'
+				defaultValue={exchangeRateItemId}
         onChange={onSelectChange}
       >
         {exchangeRateItems.map((item: IExchangeRate, index: number) => (
           <option 
             key={index}
             value={item.id}
-            disabled={selectedCurrencyIds.some((selectedId: number) => selectedId === item.id)}
+						disabled={item.id === selectedCurrencyId}
           >
             {item.currency}
           </option>

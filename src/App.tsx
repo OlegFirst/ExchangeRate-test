@@ -25,11 +25,11 @@ const App = () => {
         ];
 
         setExchangeRateItems(
-        fullData.map((item: IResponseData, index: number) => ({
-          id: index + 1,
-          currency: item.ccy,
-          buy: Number(item.buy),
-          sale: Number(item.sale)
+          fullData.map((item: IResponseData, index: number) => ({
+            id: index + 1,
+            currency: item.ccy,
+            buy: Number(item.buy),
+            sale: Number(item.sale)
           }))
         );
       });

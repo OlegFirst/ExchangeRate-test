@@ -1,22 +1,20 @@
 import { FunctionComponent } from 'react';
 import moment from 'moment';
 
+import ImageBlock from './ImageBlock/ImageBlock';
+
 import { IExchangeRate } from '../../common/interfaces';
 import './Header.scss';
 
 const Header: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ exchangeRateItems }) => (
   <header className='Header'>
-    <h1 className='Header__Title'>Privat Bank currency rates</h1>
+    <h1 className='Header__Title'>'Privat Bank' <br /> currency rates</h1>
 
     <h4 className='Header__Date'>Date: {moment().format('MM.DD.YYYY')}</h4>
-
-    <img 
-      className='Header__Image'
-      src='images/exchange.jpg'
-      width='80'
-      height='80'
-      alt='bg' 
-    />
+		
+		<div className='Header__ImageBlock'>
+			<ImageBlock />
+		</div>
 
     <table className='Header__Table'>
       <thead>

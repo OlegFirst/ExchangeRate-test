@@ -5,65 +5,63 @@ import Selector from './Selector/Selector';
 import { 
   IExchangeRate,
   IConverterData, 
-  selectorComponentIdValues
+  selectorComponentIdValues,
+	ICurrentSelectedCurrencyId
 } from '../../common/interfaces';
-import { dataInitialState, calculate } from './utils';
+import { 
+	dataInitialState,
+	calculateBlurredData,
+	getSelectedCurrencyId
+} from './utils';
 import './Converter.scss';
 
 const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ exchangeRateItems }) => {
   const [data, setData] = useState<IConverterData[]>(dataInitialState);
-  const [selectedCurrencyIds, setSelectedCurrencyIds] = useState<number[]>([]);
+  const [selectedCurrencyIds, setSelectedCurrencyIds] = useState<ICurrentSelectedCurrencyId[]>([]);
   
-  const onChange = (selectorData: IConverterData) => {
-    // calculate(selectorData.selectorComponentId, data, exchangeRateItems);
-    
-    // return;
-    
-    // Update focused filed
+  const onChange = (focusedData: IConverterData) => {
+    const blurredValue: number = calculateBlurredData(focusedData, data, exchangeRateItems);
+       
     setData(prevState => (
       prevState.map((item: IConverterData) => (
-        item.selectorComponentId === selectorData.selectorComponentId
+        item.selectorComponentId === focusedData.selectorComponentId
         ? {
           ...item,
-          ...selectorData
+          ...focusedData
         }
-        : item
+        : {
+					...item,
+					value: blurredValue
+				}
       )
     )));
-    
-    // Update blured filed
-    // const focusedId = selectorData.selectorComponentId;
-    // calculate(focusedId, data, exchangeRateItems);
 	};
 	
   useEffect(() => {
-    const currentSelectedCurrencyIds = data.reduce((acc, item) => (
-      acc.concat(item.exchangeRateItemId)
-    ), [] as number[]);
+		console.log('--------------------------------')
+		// console.log('data:', data)
+		
+    const currentSelectedCurrencyIds = data.reduce((acc, item: IConverterData) => (
+      acc.concat({
+				selectorComponentId: item.selectorComponentId,
+				exchangeRateItemId: item.exchangeRateItemId
+			})
+    ), [] as ICurrentSelectedCurrencyId[]);
     
     setSelectedCurrencyIds(currentSelectedCurrencyIds);
 	}, [data]);
-  
-  useEffect(() => {
-    console.log('_', selectedCurrencyIds)
-  }, [selectedCurrencyIds]);
 	
   return (
     <main className='Converter'>
-      {data.map((item: IConverterData, index: number) => {
-        
-        
-        
-        // const disabledId: number = item.selectorComponentId === 1 
-          // ? data[1].exchangeRateItemId 
-          // : data[0].exchangeRateItemId
+      {data.map((item: IConverterData) => {
+				const selectedCurrencyId = getSelectedCurrencyId(item.selectorComponentId, selectedCurrencyIds);
 								
         return (
           <Selector
-            key={index}
+            key={item.selectorComponentId}
             data={item}
             exchangeRateItems={exchangeRateItems}
-            selectedCurrencyIds={selectedCurrencyIds}
+            selectedCurrencyId={selectedCurrencyId}
             onChange={onChange}
           />
         )
