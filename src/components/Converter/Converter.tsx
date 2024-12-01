@@ -5,12 +5,12 @@ import Selector from './Selector/Selector';
 import { 
   IExchangeRate,
   IConverterData,
-	ICurrentSelectedCurrencyId
+  ICurrentSelectedCurrencyId
 } from '../../common/interfaces';
 import { 
-	dataInitialState,
-	calculateBlurredData,
-	getSelectedCurrencyId
+  dataInitialState,
+  calculateBlurredData,
+  getSelectedCurrencyId
 } from './utils';
 import './Converter.scss';
 
@@ -21,7 +21,7 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
   const onChange = (focusedData: IConverterData) => {
     const blurredValue: string = calculateBlurredData(focusedData, data, exchangeRateItems);
 		
-		setData(prevState => (
+    setData(prevState => (
       prevState.map((item: IConverterData) => (
         item.selectorComponentId === focusedData.selectorComponentId
         ? {
@@ -29,8 +29,8 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
           ...focusedData
         }
         : {
-					...item,
-					value: blurredValue
+          ...item,
+          value: blurredValue
 				}
       )
     )));
@@ -39,8 +39,8 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
   useEffect(() => {		
     const currentSelectedCurrencyIds = data.reduce((acc, item: IConverterData) => (
       acc.concat({
-				selectorComponentId: item.selectorComponentId,
-				exchangeRateItemId: item.exchangeRateItemId
+        selectorComponentId: item.selectorComponentId,
+        exchangeRateItemId: item.exchangeRateItemId
 			})
     ), [] as ICurrentSelectedCurrencyId[]);
     
@@ -50,7 +50,7 @@ const Converter: FunctionComponent<{ exchangeRateItems: IExchangeRate[] }> = ({ 
   return (
     <main className='Converter'>
       {data.map((item: IConverterData) => {
-				const selectedCurrencyId = getSelectedCurrencyId(item.selectorComponentId, selectedCurrencyIds);
+        const selectedCurrencyId = getSelectedCurrencyId(item.selectorComponentId, selectedCurrencyIds);
 								
         return (
           <Selector
